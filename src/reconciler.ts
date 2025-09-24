@@ -1,10 +1,10 @@
+import type * as React from 'react';
+import { createContext } from 'react';
 import createReconciler, { type ReactContext } from 'react-reconciler';
 import {
   DefaultEventPriority,
   NoEventPriority,
 } from 'react-reconciler/constants.js';
-import type * as React from 'react';
-import { createContext } from 'react';
 
 // 定义类型
 type ElementNames = string;
@@ -41,19 +41,22 @@ export class MarkdownNode {
   }
 
   appendChild(child: MarkdownNode | TextNode): void {
-    console.log('MarkdownNode.appendChild called:', { 
-      parentType: this.type, 
-      childType: child instanceof TextNode ? `TextNode("${child.text}")` : `MarkdownNode(${child.type})`,
-      childrenBefore: this.children.length
+    console.log('MarkdownNode.appendChild called:', {
+      parentType: this.type,
+      childType:
+        child instanceof TextNode
+          ? `TextNode("${child.text}")`
+          : `MarkdownNode(${child.type})`,
+      childrenBefore: this.children.length,
     });
-    
+
     this.children.push(child);
     if ('parent' in child) {
       child.parent = this;
     }
-    
-    console.log('MarkdownNode.appendChild completed:', { 
-      childrenAfter: this.children.length 
+
+    console.log('MarkdownNode.appendChild completed:', {
+      childrenAfter: this.children.length,
     });
   }
 
@@ -64,7 +67,10 @@ export class MarkdownNode {
     }
   }
 
-  insertBefore(child: MarkdownNode | TextNode, beforeChild: MarkdownNode | TextNode): void {
+  insertBefore(
+    child: MarkdownNode | TextNode,
+    beforeChild: MarkdownNode | TextNode,
+  ): void {
     const index = this.children.indexOf(beforeChild);
     if (index !== -1) {
       this.children.splice(index, 0, child);
@@ -75,8 +81,6 @@ export class MarkdownNode {
       child.parent = this;
     }
   }
-
- 
 }
 
 // 当前更新优先级
@@ -100,12 +104,20 @@ const hostConfig = {
   },
 
   // 获取子元素上下文
-  getChildHostContext(parentHostContext: HostContext, type: string): HostContext {
+  getChildHostContext(
+    parentHostContext: HostContext,
+    type: string,
+  ): HostContext {
     const previousIsInsideText = parentHostContext.isInsideText;
     // 检查是否应该作为文本处理
-    const isInsideText = type === 'text' || type === 'span' || previousIsInsideText;
+    const isInsideText =
+      type === 'text' || type === 'span' || previousIsInsideText;
 
-    console.log('getChildHostContext:', { type, previousIsInsideText, isInsideText });
+    console.log('getChildHostContext:', {
+      type,
+      previousIsInsideText,
+      isInsideText,
+    });
 
     if (previousIsInsideText === isInsideText) {
       return parentHostContext;
@@ -135,12 +147,22 @@ const hostConfig = {
 
   // 添加子元素
   appendChild(parent: MarkdownNode, child: MarkdownNode | TextNode): void {
-    console.log('appendChild:', { parent: parent.type, child: child instanceof TextNode ? `TextNode("${child.text}")` : `MarkdownNode(${child.type})` });
+    console.log('appendChild:', {
+      parent: parent.type,
+      child:
+        child instanceof TextNode
+          ? `TextNode("${child.text}")`
+          : `MarkdownNode(${child.type})`,
+    });
     parent.appendChild(child);
   },
 
   // 插入子元素
-  insertBefore(parent: MarkdownNode, child: MarkdownNode | TextNode, beforeChild: MarkdownNode | TextNode): void {
+  insertBefore(
+    parent: MarkdownNode,
+    child: MarkdownNode | TextNode,
+    beforeChild: MarkdownNode | TextNode,
+  ): void {
     console.log('insertBefore:', { parent: parent.type, child, beforeChild });
     parent.insertBefore(child, beforeChild);
   },
@@ -151,7 +173,11 @@ const hostConfig = {
   },
 
   // 更新文本内容
-  commitTextUpdate(textInstance: TextNode, _oldText: string, newText: string): void {
+  commitTextUpdate(
+    textInstance: TextNode,
+    _oldText: string,
+    newText: string,
+  ): void {
     textInstance.setText(newText);
   },
 
@@ -166,7 +192,7 @@ const hostConfig = {
     _type: string,
     _oldProps: Props,
     _newProps: Props,
-    _internalHandle: unknown
+    _internalHandle: unknown,
   ): void {
     // 在这个简单实现中，我们不需要特殊的更新逻辑
   },
@@ -198,8 +224,17 @@ const hostConfig = {
   },
 
   // 添加缺失的方法
-  appendInitialChild(parent: MarkdownNode, child: MarkdownNode | TextNode): void {
-    console.log('appendInitialChild:', { parent: parent.type, child: child instanceof TextNode ? `TextNode("${child.text}")` : `MarkdownNode(${child.type})` });
+  appendInitialChild(
+    parent: MarkdownNode,
+    child: MarkdownNode | TextNode,
+  ): void {
+    console.log('appendInitialChild:', {
+      parent: parent.type,
+      child:
+        child instanceof TextNode
+          ? `TextNode("${child.text}")`
+          : `MarkdownNode(${child.type})`,
+    });
     parent.appendChild(child);
   },
 
@@ -218,7 +253,10 @@ const hostConfig = {
   },
   resetAfterCommit(containerInfo: MarkdownNode): void {
     console.log('resetAfterCommit called, containerInfo:', containerInfo);
-    console.log('resetAfterCommit containerInfo.children:', containerInfo.children);
+    console.log(
+      'resetAfterCommit containerInfo.children:',
+      containerInfo.children,
+    );
     lastRootNode = containerInfo;
     _renderCompleted = true;
   },
@@ -240,18 +278,41 @@ const hostConfig = {
   detachDeletedInstance(): void {},
 
   // 容器相关方法
-  appendChildToContainer(container: MarkdownNode, child: MarkdownNode | TextNode): void {
-    console.log('appendChildToContainer:', { container: container.type, child: child instanceof TextNode ? `TextNode("${child.text}")` : `MarkdownNode(${child.type})` });
+  appendChildToContainer(
+    container: MarkdownNode,
+    child: MarkdownNode | TextNode,
+  ): void {
+    console.log('appendChildToContainer:', {
+      container: container.type,
+      child:
+        child instanceof TextNode
+          ? `TextNode("${child.text}")`
+          : `MarkdownNode(${child.type})`,
+    });
     container.appendChild(child);
   },
 
-  insertInContainerBefore(container: MarkdownNode, child: MarkdownNode | TextNode, beforeChild: MarkdownNode | TextNode): void {
-    console.log('insertInContainerBefore:', { container: container.type, child, beforeChild });
+  insertInContainerBefore(
+    container: MarkdownNode,
+    child: MarkdownNode | TextNode,
+    beforeChild: MarkdownNode | TextNode,
+  ): void {
+    console.log('insertInContainerBefore:', {
+      container: container.type,
+      child,
+      beforeChild,
+    });
     container.insertBefore(child, beforeChild);
   },
 
-  removeChildFromContainer(container: MarkdownNode, child: MarkdownNode | TextNode): void {
-    console.log('removeChildFromContainer:', { container: container.type, child });
+  removeChildFromContainer(
+    container: MarkdownNode,
+    child: MarkdownNode | TextNode,
+  ): void {
+    console.log('removeChildFromContainer:', {
+      container: container.type,
+      child,
+    });
     container.removeChild(child);
   },
 
@@ -292,7 +353,9 @@ const hostConfig = {
   NotPendingTransition: null as unknown,
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  HostTransitionContext: createContext(null) as unknown as ReactContext<unknown>,
+  HostTransitionContext: createContext(
+    null,
+  ) as unknown as ReactContext<unknown>,
 
   resetFormInstance(): void {},
 
@@ -330,5 +393,3 @@ export const reconciler = createReconciler<
   unknown,
   unknown
 >(hostConfig);
-
-

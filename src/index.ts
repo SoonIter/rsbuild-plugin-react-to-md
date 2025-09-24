@@ -16,4 +16,4 @@ export const pluginReactToMd = (
 });
 
 // 导出渲染函数
-export { renderToMd, MarkdownNode, TextNode } from './reconciler.js';
+export { MarkdownNode, renderToMd, TextNode } from './reconciler.js';
