@@ -1,16 +1,19 @@
 import type { RsbuildPlugin } from '@rsbuild/core';
 
-export type PluginExampleOptions = {
+export type pluginReactToMdOptions = {
   foo?: string;
   bar?: boolean;
 };
 
-export const pluginExample = (
-  options: PluginExampleOptions = {},
+export const pluginReactToMd = (
+  options: pluginReactToMdOptions = {},
 ): RsbuildPlugin => ({
-  name: 'plugin-example',
+  name: 'plugin-react-to-md',
 
   setup() {
-    console.log('Hello Rsbuild!', options);
+    console.log('React to Markdown plugin loaded!', options);
   },
 });
+
+// 导出渲染函数
+export { renderToMd, MarkdownNode, TextNode } from './reconciler.js';

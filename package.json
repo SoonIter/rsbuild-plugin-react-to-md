@@ -1,5 +1,5 @@
 {
-  "name": "rsbuild-plugin-example",
+  "name": "rsbuild-plugin-react-to-md",
   "version": "0.0.0",
   "repository": "https://github.com/rspack-contrib/rsbuild-plugin-template",
   "license": "MIT",
@@ -38,6 +38,12 @@
     "playwright": "^1.53.2",
     "simple-git-hooks": "^2.13.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "react-reconciler": "^0.32.0",
+    "@types/react-reconciler": "^0.32.1",
+    "react": "^19.1.0",
+    "@types/react": "^19.1.13"
   },
   "peerDependencies": {
     "@rsbuild/core": "1.x"

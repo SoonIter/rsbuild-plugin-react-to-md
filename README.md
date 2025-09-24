@@ -1,13 +1,13 @@
-# rsbuild-plugin-example
+# rsbuild-plugin-react-to-md
 
 Example plugin for Rsbuild.
 
 <p>
-  <a href="https://npmjs.com/package/rsbuild-plugin-example">
-   <img src="https://img.shields.io/npm/v/rsbuild-plugin-example?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" />
+  <a href="https://npmjs.com/package/rsbuild-plugin-react-to-md">
+   <img src="https://img.shields.io/npm/v/rsbuild-plugin-react-to-md?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" />
   </a>
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="license" />
-  <a href="https://npmcharts.com/compare/rsbuild-plugin-example?minimal=true"><img src="https://img.shields.io/npm/dm/rsbuild-plugin-example.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="downloads" /></a>
+  <a href="https://npmcharts.com/compare/rsbuild-plugin-react-to-md?minimal=true"><img src="https://img.shields.io/npm/dm/rsbuild-plugin-react-to-md.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="downloads" /></a>
 </p>
 
 ## Usage
@@ -15,17 +15,17 @@ Example plugin for Rsbuild.
 Install:
 
 ```bash
-npm add rsbuild-plugin-example -D
+npm add rsbuild-plugin-react-to-md -D
 ```
 
 Add plugin to your `rsbuild.config.ts`:
 
 ```ts
 // rsbuild.config.ts
-import { pluginExample } from "rsbuild-plugin-example";
+import { pluginReactToMd } from "rsbuild-plugin-react-to-md";
 
 export default {
-  plugins: [pluginExample()],
+  plugins: [pluginReactToMd()],
 };
 ```
 
@@ -40,7 +40,7 @@ Some description.
 - Example:
 
 ```js
-pluginExample({
+pluginReactToMd({
   foo: "bar",
 });
 ```
