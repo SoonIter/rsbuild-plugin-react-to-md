@@ -1,3 +1,4 @@
+import { setTimeout } from 'timers/promises';
 import {
   lastRootNode,
   MarkdownNode,
@@ -107,7 +108,7 @@ function toMarkdown(root: MarkdownNode): string {
 }
 
 // 渲染函数
-export function renderToMd(element: React.ReactElement): string {
+export async function renderToMd(element: React.ReactElement): Promise<string> {
   console.log('renderToMd called with element:', element);
   const container = new MarkdownNode('root');
   // _renderCompleted = false;
@@ -126,10 +127,9 @@ export function renderToMd(element: React.ReactElement): string {
 
   reconciler.updateContainer(element, root, null, null);
 
-  setTimeout(() => {
-    const result = lastRootNode ? toMarkdown(lastRootNode) : '';
-    console.log(result);
-  }, 3000);
+  await setTimeout(0);
+  const result = lastRootNode ? toMarkdown(lastRootNode) : '';
+  console.log('=======\n', result, '==================');
 
-  return '';
+  return result;
 }
