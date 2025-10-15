@@ -10,8 +10,6 @@ import {
 function toMarkdown(root: MarkdownNode): string {
   const { type, props, children } = root;
 
-  console.log(332423424243, children, 111111111);
-
   // 获取子元素的 Markdown
   const childrenMd = children
     .map((child) => {
